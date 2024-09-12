@@ -28,12 +28,14 @@ export default function Signup() {
       });
       const data = await res.json();
       setLoading(false);
-      navigate('/sign-in')
+      
 
       if(data.errors){
         setError(true);
         return;
-      } 
+      }
+      
+      navigate('/sign-in');
     } catch (error) {
       setLoading(false);
       setError(true);

@@ -27,13 +27,12 @@ export default function Signup() {
       });
       const data = await res.json();
       setLoading(false);
+      // setFormData({});
 
       if(data.errors){
         setError(true);
         return;
-      }
-      
-
+      } 
     } catch (error) {
       setLoading(false);
       setError(true);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import OAuth from '../components/OAuth';
 
 
 export default function Signup() {
@@ -28,10 +29,10 @@ export default function Signup() {
       });
       const data = await res.json();
       setLoading(false);
-      
+      console.log(data);
 
-      if(data.errors){
-        setError(true);
+      if(data.success === false){
+        setError(data.message);
         return;
       }
       
@@ -58,6 +59,8 @@ export default function Signup() {
         />
         <button disabled = {loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase font-bold hover:opacity-95 disaibled:opacty-80'> 
         {loading? 'Loading': 'Sign up'} </button>
+
+        <OAuth />
       </form>
 
       <div className='flex gap-2 mt-5'>
@@ -67,7 +70,7 @@ export default function Signup() {
         </Link>
       </div>
 
-      <p className='text-red-800 mt-5'> {error && "Something went wrong"} </p>
+      <p className='text-red-800 mt-5'> {error ? error || "Something went wrong" : ''} </p>
     </div>
   )
 }

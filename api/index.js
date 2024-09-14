@@ -5,6 +5,7 @@ import userRouter from '../api/routes/user.js'
 import authRouter from '../api/routes/auth.js'
 import { errorHandler } from './utils/error.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 dotenv.config();
 
@@ -15,11 +16,16 @@ mongoose
     })
     .catch((err) => {
         console.log(err);
-    })
+    });
 
+const _dirname = path.resolve();
 
 const app = express();
+
+app.use(express.static(path.join(_dirname, '/client/dist')));
+
 app.use(express.json());
+
 app.use(cookieParser());
 
 
@@ -27,6 +33,10 @@ const PORT  = 3000;
 app.listen(PORT, () => {
     console.log('server is running on ' + PORT );
 });
+
+app.get('*',(req,res) => {
+  res.sendFile(path.join(_dirname, 'client', 'dist', 'index.html'));
+})
 
 
 app.use("/api/user",userRouter);

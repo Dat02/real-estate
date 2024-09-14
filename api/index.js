@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRouter from '../api/routes/user.js'
 import authRouter from '../api/routes/auth.js'
 import { errorHandler } from './utils/error.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -19,9 +20,12 @@ mongoose
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
-app.listen(3000, () => {
-    console.log('server is running');
+
+const PORT  = 3000;
+app.listen(PORT, () => {
+    console.log('server is running on ' + PORT );
 });
 
 

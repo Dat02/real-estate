@@ -83,4 +83,7 @@ export const google = async (req,res,next) => {
     }
 };
     
-
+export const signout = (req,res) => {
+    res.clearCookie('jwt');
+    res.status(200).json('sign out success');
+}

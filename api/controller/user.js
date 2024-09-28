@@ -1,8 +1,8 @@
-import { json } from 'express'
+
 import UserModel from '../model/user.js'
 import { errorHandler } from '../utils/error.js'
 import bcryptjs from 'bcryptjs'
-import User from '../model/user.js'
+
 
 export const updateUser = async (req,res,next) => {
 
